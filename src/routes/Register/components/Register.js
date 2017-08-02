@@ -73,7 +73,7 @@ class Register extends Component {
   }
 
   onSumbit () {
-    this.props.registerUser()
+    this.props.register()
   }
 
   render () {
@@ -146,7 +146,7 @@ class Register extends Component {
   }
 }
 Register.propTypes = {
-  registerUser: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
   errors : PropTypes.arrayOf(PropTypes.string)
 }
 
