@@ -47,43 +47,59 @@ class Register extends Component {
     super(props)
     this.state = {
       user: {
-        first_name : null,
-        last_name : null,
-        email : null,
-        password : null,
+        first_name : undefined,
+        last_name : undefined,
+        email : undefined,
+        password : undefined,
       },
-      password_confirm : null,
+      password_confirm : undefined,
+      isAllFilled : false,
       submitDisabled : true,
     }
     this.handleChange = this.handleChange.bind(this)
     this.validatorListener = this.validatorListener.bind(this)
+    this.checkUserData = this.checkUserData.bind(this)
+    console.log('Props: ', props)
+    console.log('this : ', this)
   }
 
   componentWillMount () {
     // custom rule will have name 'isPasswordMatch'
-    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-      if (value !== this.state.user.password) {
-        return false
-      }
-      return true
-    })
+    ValidatorForm.addValidationRule('isPasswordMatch', (value) =>
+      this.state.user.password === this.state.password_confirm)
+    /* Also need password length rule */
   }
 
   handleChange (event) {
     const { user } = this.state
     if (event.target.name !== 'password_confirm') {
       user[event.target.name] = event.target.value
-      this.setState({ user })
+      this.setState({ user, isAllFilled : this.checkUserData(user) })
     } else {
-      this.setState({ password_confirm : event.target.value })
+      this.setState({ password_confirm : event.target.value, isAllFilled : this.checkUserData(user) })
     }
   }
 
-  validatorListener (result) {
-    this.setState({ submitDisabled: !result })
+  checkUserData (user) {
+    const pwc = this.state.password_confirm
+    if (pwc === undefined || pwc === null || pwc === '') { return false }
+    for (var key in user) {
+      if (user.hasOwnProperty(key)) {
+        if (user[key] === undefined || user[key] === null || user[key] === '') { return false }
+      }
+    }
+    return true
   }
 
-  // handleSubmit is called when the form is valid automatically
+  validatorListener (result) {
+    console.log('is Valid', result, 'isAllFilled', this.state.isAllFilled)
+    if (result && this.state.isAllFilled) {
+      this.setState({ submitDisabled: false })
+    } else {
+      this.setState({ submitDisabled: true })
+    }
+  }
+
   handleSubmit () {
     this.props.register(this.state.user)
   }
@@ -97,12 +113,11 @@ class Register extends Component {
           ref='form'
           onSubmit={this.handleSubmit}
           instantValidate
+          onError={errors => alert(errors)}
         >
           <TextValidator
             hintText='First Name'
-            // errorText={this.props.errors.register.first_name}
             floatingLabelText='First Name'
-            // multiLine={false}
             name='first_name'
             value={this.state.user.first_name}
             id='first_name'
@@ -114,9 +129,7 @@ class Register extends Component {
           /><br />
           <TextValidator
             hintText='Last Name'
-            // errorText={this.props.errors.register.last_name}
             floatingLabelText='Last Name'
-            // multiLine={false}
             name='last_name'
             value={this.state.user.last_name}
             validators={['required']}
@@ -127,9 +140,7 @@ class Register extends Component {
           /><br />
           <TextValidator
             hintText='Email'
-            // errorText={this.props.errors.register.email}
             floatingLabelText='Email'
-            // multiLine={false}
             name='email'
             value={this.state.user.email}
             validators={['required', 'isEmail']}
@@ -140,9 +151,7 @@ class Register extends Component {
           /><br />
           <TextValidator
             hintText='Password'
-            // errorText={this.props.errors.register.password}
             floatingLabelText='Password'
-            // multiLine={false}
             name='password'
             value={this.state.user.password}
             type='password'
@@ -154,9 +163,7 @@ class Register extends Component {
           /><br />
           <TextValidator
             hintText='Confirm Password'
-            // errorText={this.props.errors.register.confirm_password}
             floatingLabelText='Confirm Password'
-            // multiLine={false}
             name='password_confirm'
             value={this.state.password_confirm}
             type='password'
@@ -175,7 +182,7 @@ class Register extends Component {
 }
 Register.propTypes = {
   register: PropTypes.func.isRequired,
-  //errors : PropTypes.arrayOf(PropTypes.string)
+  // errors : PropTypes.arrayOf(PropTypes.string)
 }
 
 export default Register
