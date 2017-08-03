@@ -19,9 +19,12 @@ export const REGISTER_USER_FULFILLED = 'REGISTER_USER_FULFILLED'
 payload should be an axios.post(register roue, user)
 */
 export function register (user = null) {
+  console.log(user)
   return {
     type    : REGISTER_USER,
-    payload : UserService.register(user)
+    payload : {
+      promise: UserService.register(user)
+    }
   }
 }
 
@@ -52,8 +55,8 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [REGISTER_USER_PENDING]  : (state, action) => ({ ...state, fetching : true }),
-  [REGISTER_USER_REJECTED] : (state, action) => ({ ...state, fetching : false, user : null, error : action.payload.error }),
-  [REGISTER_USER_FULFILLED] : (state, action) => ({ ...state, fetching : false, auth : action.payload.auth, user :action.payload.user, error: null }),
+  [REGISTER_USER_REJECTED] : (state, action) => ({ ...state, fetching : false, user : null, error : action.payload }),
+  [REGISTER_USER_FULFILLED] : (state, action) => ({ ...state, fetching : false, auth : action.payload, user :action.payload, error: null }),
 }
 
 // ------------------------------------

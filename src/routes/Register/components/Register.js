@@ -59,6 +59,8 @@ class Register extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.validatorListener = this.validatorListener.bind(this)
     this.checkUserData = this.checkUserData.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    // this.register = props.register.bind(this)
     console.log('Props: ', props)
     console.log('this : ', this)
   }
@@ -70,7 +72,7 @@ class Register extends Component {
     /* Also need password length rule */
   }
 
-  handleChange (event) {
+  handleChange(event) {
     const { user } = this.state
     if (event.target.name !== 'password_confirm') {
       user[event.target.name] = event.target.value
@@ -91,8 +93,8 @@ class Register extends Component {
     return true
   }
 
-  validatorListener (result) {
-    console.log('is Valid', result, 'isAllFilled', this.state.isAllFilled)
+  validatorListener(result) {
+    // console.log('is Valid', result, 'isAllFilled', this.state.isAllFilled)
     if (result && this.state.isAllFilled) {
       this.setState({ submitDisabled: false })
     } else {
@@ -100,8 +102,13 @@ class Register extends Component {
     }
   }
 
-  handleSubmit () {
-    this.props.register(this.state.user)
+  handleSubmit (e) {
+    e.preventDefault()
+    if (!this.state.submitDisabled) {
+      const { user } = this.state
+      console.log(user)
+      this.props.register(user)
+    }
   }
 
   render () {
