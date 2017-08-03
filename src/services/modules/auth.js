@@ -55,7 +55,7 @@ export const actions = {
 const ACTION_HANDLERS = {
   [REGISTER_USER_PENDING]  : (state, action) => ({ ...state, fetching : true }),
   [REGISTER_USER_REJECTED] : (state, action) => ({ ...state, fetching : false, user : null, error : action.payload }),
-  [REGISTER_USER_FULFILLED] : (state, action) => ({ fetching : false, auth : action.payload.auth, user :action.payload.user, error: null }),
+  [REGISTER_USER_FULFILLED] : (state, action) => ({ fetching : false, token : action.payload.auth.access_token, expires_in : action.payload.auth.expires_in, user :action.payload.user, error: null }),
 }
 
 // ------------------------------------
