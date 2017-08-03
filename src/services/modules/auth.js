@@ -2,7 +2,7 @@
 // Imports
 // ------------------------------------
 // import {defaultStore} from '../../../store/createStore'
-import UserService from 'services/api/users'
+import AuthService from '../api/auth'
 
 // ------------------------------------
 // Constants
@@ -19,11 +19,10 @@ export const REGISTER_USER_FULFILLED = 'REGISTER_USER_FULFILLED'
 payload should be an axios.post(register roue, user)
 */
 export function register (user = null) {
-  console.log(user)
   return {
     type    : REGISTER_USER,
     payload : {
-      promise: UserService.register(user)
+      promise: AuthService.register(user)
     }
   }
 }
@@ -56,14 +55,14 @@ export const actions = {
 const ACTION_HANDLERS = {
   [REGISTER_USER_PENDING]  : (state, action) => ({ ...state, fetching : true }),
   [REGISTER_USER_REJECTED] : (state, action) => ({ ...state, fetching : false, user : null, error : action.payload }),
-  [REGISTER_USER_FULFILLED] : (state, action) => ({ ...state, fetching : false, auth : action.payload, user :action.payload, error: null }),
+  [REGISTER_USER_FULFILLED] : (state, action) => ({ fetching : false, auth : action.payload.auth, user :action.payload.user, error: null }),
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = 0
-export default function registerReducer (state = initialState, action) {
+export default function authReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

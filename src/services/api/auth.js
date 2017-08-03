@@ -7,8 +7,7 @@ function register (data) {
   return request({
     method : 'post',
     url: '/users',
-    data : {user: data},
-    timeout: 2500
+    data : { user: data },
   })
 }
 
@@ -26,8 +25,8 @@ function logout () {
   })
 }
 
-const UserService = {
+const AuthService = {
   register, login, logout,
 }
 
-export default UserService
+export default AuthService

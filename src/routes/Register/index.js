@@ -10,15 +10,15 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const Register = require('./containers/RegisterContainer').default
-      const reducer = require('./modules/register').default
+      const reducer = require('services/modules/auth').default
 
       /*  Add the reducer to the store on key 'register'  */
-      injectReducer(store, { key: 'register', reducer })
+      injectReducer(store, { key: 'auth', reducer })
 
       /*  Return getComponent   */
       cb(null, Register)
 
     /* Webpack named bundle   */
-  }, 'register')
+  }, 'auth')
   }
 })
