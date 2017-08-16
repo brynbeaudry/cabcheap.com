@@ -11,10 +11,11 @@ function register (data) {
   })
 }
 
-function login (email, password) {
+function login (user) {
   return request({
     url: '/login',
-    method : 'POST'
+    method : 'POST',
+    data : { email: user.email, password: user.password}
   })
 }
 
