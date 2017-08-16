@@ -5,12 +5,13 @@ import makeRootReducer from './reducers'
 import { updateLocation } from './location'
 import logger from 'redux-logger'
 import promiseMiddleware from 'redux-promise-middleware'
+import authRouter from '../middleware/authRouter'
 
 const createStore = (initialState = {}) => {
   // ======================================================
   // Middleware Configuration
   // ======================================================
-  const middleware = [thunk, promiseMiddleware(), logger]
+  const middleware = [thunk, promiseMiddleware(), logger, authRouter]
 
   // ======================================================
   // Store Enhancers
