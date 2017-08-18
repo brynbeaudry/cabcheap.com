@@ -1,7 +1,5 @@
 import request from '../request'
 
-const path = '/users'
-
 function register (data) {
   console.log('in register: ', data)
   return request({

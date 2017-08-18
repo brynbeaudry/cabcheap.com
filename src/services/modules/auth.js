@@ -67,18 +67,59 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [REGISTER_USER_PENDING]  : (state, action) => ({ ...state, fetching : true }),
-  [REGISTER_USER_REJECTED] : (state, action) => ({ ...state, fetching : false, user : null, error : action.payload }),
-  [REGISTER_USER_FULFILLED] : (state, action) => ({ fetching : false, token : action.payload.auth.access_token, expires_in : action.payload.auth.expires_in, user :action.payload.user, error: null }),
-  [LOGIN_USER_PENDING]  : (state, action) => ({ ...state, fetching : true }),
-  [LOGIN_USER_REJECTED] : (state, action) => ({ ...state, fetching : false, user : null, error : action.payload }),
-  [LOGIN_USER_FULFILLED] : (state, action) => {
-    return ({
+  [REGISTER_USER_PENDING]  : (state, action) => {
+    return ({ ...state,
+      token : null,
+      expires_in : null,
+      user : null,
+      error: null,
+      fetching : true,
+    })
+  },
+  [REGISTER_USER_REJECTED] : (state, action) => {
+    return ({ ...state,
+      token : null,
+      expires_in : null,
+      user : null,
+      error: action.payload.error,
       fetching : false,
-      token : action.payload.access_token,
-      expires_in : action.payload.expires_in,
-      user :action.meta,
-      error: null })
+    })
+  },
+  [REGISTER_USER_FULFILLED] : (state, action) => {
+    return ({ ...state,
+      token: action.payload.auth.access_token,
+      expires_in: action.payload.auth.expires_in,
+      user : action.payload.user,
+      error: null,
+      fetching : false,
+    })
+  },
+  [LOGIN_USER_PENDING]  : (state, action) => {
+    return ({ ...state,
+      token : null,
+      expires_in : null,
+      user : null,
+      error: null,
+      fetching : true,
+    })
+  },
+  [LOGIN_USER_REJECTED] : (state, action) => {
+    return ({ ...state,
+      token : null,
+      expires_in : null,
+      user : null,
+      error: action.payload.error,
+      fetching : false,
+    })
+  },
+  [LOGIN_USER_FULFILLED] : (state, action) => {
+    return ({ ...state,
+      token: action.payload.auth.access_token,
+      expires_in: action.payload.auth.expires_in,
+      user : action.payload.user,
+      error: null,
+      fetching : false,
+    })
   },
 }
 
