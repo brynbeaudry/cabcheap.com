@@ -72,7 +72,7 @@ class Register extends Component {
     /* Also need password length rule */
   }
 
-  handleChange(event) {
+  handleChange (event) {
     const { user } = this.state
     if (event.target.name !== 'password_confirm') {
       user[event.target.name] = event.target.value
@@ -93,7 +93,7 @@ class Register extends Component {
     return true
   }
 
-  validatorListener(result) {
+  validatorListener (result) {
     // console.log('is Valid', result, 'isAllFilled', this.state.isAllFilled)
     if (result && this.state.isAllFilled) {
       this.setState({ submitDisabled: false })

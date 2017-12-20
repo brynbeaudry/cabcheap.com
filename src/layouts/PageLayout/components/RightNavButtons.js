@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import FlatButton from 'material-ui/FlatButton'
 import { Link } from 'react-router'
 
-/*Some buttons :
+/* Some buttons :
 Login
 Register
 
@@ -16,38 +16,39 @@ const styles = {
     verticalAlign : 'middle',
     color : 'white',
   }
-};
-
-class RightNavButtons extends Component {
-    constructor(props=null){
-      super(props);
-    }
-
-    render(){
-      return(
-        <div>
-          <Link to="/login" activeClassName="">
-            <FlatButton
-              label="Login"
-              labelPosition="before"
-              style={styles.navBarRightButton}
-              containerElement="label"
-            />
-          </Link>
-          <Link to="/register" activeClassName="">
-            <FlatButton
-              label="Register"
-              labelPosition="before"
-              style={styles.navBarRightButton}
-              containerElement="label"
-            />
-          </Link>
-        </div>
-      );
-    }
 }
 
-/*This is a smart component, which needs to know whether or not the user is authorized.*/
+class RightNavButtons extends Component {
+  constructor (props = null) {
+    super(props)
+  }
+
+  render () {
+    return (
+      <div>
+        <Link to='/login' activeClassName=''>
+          <FlatButton
+            label='Login'
+            labelPosition='before'
+            style={styles.navBarRightButton}
+            containerElement='label'
+            />
+        </Link>
+        <Link to='/register' activeClassName=''>
+          <FlatButton
+            label='Register'
+            labelPosition='before'
+            style={styles.navBarRightButton}
+            containerElement='label'
+            />
+        </Link>
+      </div>
+    )
+  }
+}
+
+/* This is a smart component, which needs to know whether or not the user is authorized. */
+/* Technically the app bar should be a smart component, and pass this a state as props. */
 const mapStateToProps = (state = null) => ({
   auth : state.auth
 })

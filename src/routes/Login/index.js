@@ -12,13 +12,13 @@ export default (store) => ({
       const Login = require('./containers/LoginContainer').default
       const reducer = require('services/modules/auth').default
 
-      /*  Add the reducer to the store on key 'register'  */
+      /*  Add the reducer to the store on key 'login'  */
       injectReducer(store, { key: 'auth', reducer })
 
       /*  Return getComponent   */
       cb(null, Login)
 
     /* Webpack named bundle   */
-  }, 'auth')
+    }, 'auth')
   }
 })

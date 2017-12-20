@@ -1,6 +1,6 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/PageLayout/PageLayout'
-import Home from './Home'
+import WelcomeRoute from './Welcome'
 import CounterRoute from './Counter'
 import RegisterRoute from './Register'
 import LoginRoute from './Login'
@@ -9,18 +9,53 @@ import MapRoute from './Map'
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
-export const createRoutes = (store) => ({
-  path        : '/',
-  component   : CoreLayout,
-  indexRoute  : Home,
-  childRoutes : [
-    CounterRoute(store),
-    RegisterRoute(store),
-    LoginRoute(store),
-    MapRoute(store),
-  ]
-})
+export const createRoutes = (store) => {
+  const requireLogin = (nextState, replace, cb) => {
+    const state = { ...store.getState() }
+    if (state.auth === undefined) {
+      replace('/')
+    } else {
+      const { auth: { user } } = state
+      if (!user) {
+        replace('/')
+      }
+    }
+    cb()
+  }
 
+  const requirePublic = (nextState, replace, cb) => {
+    const state = { ...store.getState() }
+    if (state.auth !== undefined) {
+      const { auth: { user } } = state
+      if (user) {
+        replace('map')
+      }
+    }
+    cb()
+  }
+
+  return ({
+    path: '/',
+    component: CoreLayout,
+    indexRoute: WelcomeRoute,
+    childRoutes: [
+      {
+        onEnter: requirePublic,
+        childRoutes: [
+          CounterRoute(store),
+          RegisterRoute(store),
+          LoginRoute(store),
+        ]
+      },
+      {
+        onEnter: requireLogin,
+        childRoutes: [
+          MapRoute(store),
+        ]
+      },
+    ]
+  })
+}
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:
 

@@ -13,7 +13,7 @@ function login (user) {
   return request({
     url: '/login',
     method : 'POST',
-    data : { email: user.email, password: user.password}
+    data : { email: user.email, password: user.password }
   })
 }
 

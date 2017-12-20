@@ -67,8 +67,8 @@ class Map extends Component {
   render () {
     return (
       <div>
-        <div id="map"
-            style={mapStyle} />
+        <div id='map'
+          style={mapStyle} />
       </div>
     )
   }

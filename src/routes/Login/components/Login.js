@@ -69,7 +69,7 @@ class Login extends Component {
     /* Also need password length rule */
   }
 
-  handleChange(event) {
+  handleChange (event) {
     const { user } = this.state
     if (event.target.name !== 'password_confirm') {
       user[event.target.name] = event.target.value
@@ -88,7 +88,7 @@ class Login extends Component {
     return true
   }
 
-  validatorListener(result) {
+  validatorListener (result) {
     // console.log('is Valid', result, 'isAllFilled', this.state.isAllFilled)
     if (result && this.state.isAllFilled) {
       this.setState({ submitDisabled: false })
@@ -141,7 +141,7 @@ class Login extends Component {
             errorStyle={errorStyle}
             validatorListener={this.validatorListener}
           /><br />
-        <br />
+          <br />
           <RaisedButton label='Login' primary style={buttonStyle}
             disabled={this.state.submitDisabled} type='submit' />
         </ValidatorForm>

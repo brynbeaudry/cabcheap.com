@@ -6,3 +6,10 @@
   font-weight: bold;
   text-decoration: underline;
 }
+
+.page-layout__title--active {
+  text-decoration: none;
+  text-decoration-line: none;
+  text-decoration-color: white;
+  color: white;
+}

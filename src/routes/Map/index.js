@@ -12,7 +12,7 @@ export default (store) => ({
       const Map = require('./containers/MapContainer').default
       const reducer = require('services/modules/map').default
 
-      /*  Add the reducer to the store on key 'register'  */
+      /*  Add the reducer to the store on key 'map'  */
       injectReducer(store, { key: 'map', reducer })
 
       /*  Return getComponent   */
