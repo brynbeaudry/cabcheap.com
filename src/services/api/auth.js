@@ -4,7 +4,7 @@ function register (data) {
   console.log('in register: ', data)
   return request({
     method : 'post',
-    url: '/users',
+    url: '/register',
     data : { user: data },
   })
 }

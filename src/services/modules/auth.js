@@ -70,7 +70,7 @@ const ACTION_HANDLERS = {
   [REGISTER_USER_PENDING]  : (state, action) => {
     return ({ ...state,
       token : null,
-      expires_in : null,
+      expires_at : null,
       user : null,
       error: null,
       fetching : true,
@@ -79,7 +79,7 @@ const ACTION_HANDLERS = {
   [REGISTER_USER_REJECTED] : (state, action) => {
     return ({ ...state,
       token : null,
-      expires_in : null,
+      expires_at : null,
       user : null,
       error: action.payload.error,
       fetching : false,
@@ -88,7 +88,7 @@ const ACTION_HANDLERS = {
   [REGISTER_USER_FULFILLED] : (state, action) => {
     return ({ ...state,
       token: action.payload.auth.access_token,
-      expires_in: action.payload.auth.expires_in,
+      expires_at: action.payload.auth.expires_at,
       user : action.payload.user,
       error: null,
       fetching : false,
@@ -97,7 +97,7 @@ const ACTION_HANDLERS = {
   [LOGIN_USER_PENDING]  : (state, action) => {
     return ({ ...state,
       token : null,
-      expires_in : null,
+      expires_at : null,
       user : null,
       error: null,
       fetching : true,
@@ -106,7 +106,7 @@ const ACTION_HANDLERS = {
   [LOGIN_USER_REJECTED] : (state, action) => {
     return ({ ...state,
       token : null,
-      expires_in : null,
+      expires_at : null,
       user : null,
       error: action.payload.error,
       fetching : false,
@@ -115,7 +115,7 @@ const ACTION_HANDLERS = {
   [LOGIN_USER_FULFILLED] : (state, action) => {
     return ({ ...state,
       token: action.payload.auth.access_token,
-      expires_in: action.payload.auth.expires_in,
+      expires_at: action.payload.auth.expires_at,
       user : action.payload.user,
       error: null,
       fetching : false,
