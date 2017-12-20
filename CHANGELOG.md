@@ -536,3 +536,4 @@ Thanks to [StevenLangbroek](https://github.com/StevenLangbroek) for the followin
   - Thanks [clearjs](https://github.com/clearjs)
 * Upgrades all outdated dependencies.
   - Karma, eslint, babel, sass-loader, and a handful more.
+ 
