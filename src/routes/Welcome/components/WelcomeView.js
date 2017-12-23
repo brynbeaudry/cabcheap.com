@@ -11,13 +11,10 @@ export const WelcomeView = () => (
     <h4 className='title'>Welcome!</h4>
     <Paper>
       <p>December 20th, 2017 :</p>
-      <p>Hi, I'm Bryn : The cybersquatter of this domain</p>
-      <p>The website is a functioning React Redux Authentication system, for a pet project which I would be excited about pursing if I wasn&rsquo;t MORE excited about full time work. Having developed many projects using JavaScript, I think React Redux makes a very progressive JavaScript Web client because of its sophisticated state management.</p>
+      <p>The website is a functioning React Redux Authentication system, for a pet project which I would be excited about pursuing if I wasn&rsquo;t MORE excited about full time work. Having developed many projects using JavaScript, I think React Redux makes a very progressive JavaScript Web client because of its sophisticated state management.</p>
       <Paper>
       <p>I implemented Google&rsquo;s Material UI for its layout, so that I could focus on learning Redux<br />
-        However, I am also very particular when it comes to UI! <br />
-        I&rsquo;ve made a custom UI that I feel showcases my skills for graphic design. It&rsquo;s a little too custom and over the top, but I&rsquo;m trying to push myself by using new tools, that take the pain out of styling programmatically, and allow me to use Photoshop.<br />
-        This is something along the lines of what this page could be.</p>
+        However, This is something along the lines of what this page could be.</p>
     </Paper>
     <Paper>
       <img alt='UiGifDemo' className='centerBlock' src={UIGifImage} />
